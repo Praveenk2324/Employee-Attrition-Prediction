@@ -1,0 +1,72 @@
+model:
+  n_estimators: 300
+  max_depth: 4
+  learning_rate: 0.05
+  scale_pos_weight: 5
+  subsample: 0.8
+  colsample_bytree: 0.8
+  eval_metric: logloss
+  early_stopping_rounds: 20
+  random_state: 42
+
+data:
+  test_size: 0.2
+  random_state: 42
+  drop_columns:
+    - EmployeeCount
+    - StandardHours
+    - Over18
+    - EmployeeNumber
+  target_column: Attrition
+
+features:
+  onehot:
+    - Department
+    - JobRole
+    - MaritalStatus
+    - EducationField
+    - BusinessTravel
+  ordinal:
+    - JobSatisfaction
+    - EnvironmentSatisfaction
+    - WorkLifeBalance
+    - JobInvolvement
+    - PerformanceRating
+  binary:
+    - OverTime
+    - Gender
+  numeric:
+    - Age
+    - DailyRate
+    - DistanceFromHome
+    - HourlyRate
+    - MonthlyIncome
+    - MonthlyRate
+    - NumCompaniesWorked
+    - PercentSalaryHike
+    - StockOptionLevel
+    - TotalWorkingYears
+    - TrainingTimesLastYear
+    - YearsAtCompany
+    - YearsInCurrentRole
+    - YearsSinceLastPromotion
+    - YearsWithCurrManager
+    - Education
+    - JobLevel
+    - RelationshipSatisfaction
+
+paths:
+  raw_data: data/raw/HR-Employee-Attrition.csv
+  train_data: data/processed/train.csv
+  test_data: data/processed/test.csv
+  pipeline: artifacts/pipeline.pkl
+  metrics: reports/metrics.json
+
+inference:
+  threshold: 0.60
+  shap_top_n: 3
+
+mlflow:
+  experiment_name: attrition-prediction
+  tracking_uri: mlruns
+  registered_model_name: attrition-pipeline
