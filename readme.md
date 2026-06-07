@@ -31,8 +31,8 @@ attrition-mlops/
 ├── artifacts/               # pipeline.pkl (DVC output, gitignored)
 ├── reports/
 │   └── metrics.json         # DVC metric file (committed)
-├── dvc.yaml                 # DVC pipeline stage definitions
-├── params.yaml              # DVC param tracking
+├── dvc.yaml                 # DVC pipeline stage definitions    
+|
 └── requirements.txt
 ```
 
