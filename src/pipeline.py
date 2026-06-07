@@ -38,11 +38,12 @@ def build_pipeline(config: dict) -> Pipeline:
         "eval_metric": m_cfg["eval_metric"],
         "random_state": m_cfg["random_state"],
         "tree_method": "hist",
+        "early_stopping_rounds": m_cfg["early_stopping_rounds"]
     }
 
     pipeline = Pipeline(steps=[
         ('preprocessor', preprocessor),
-        ('XGboost', XGBClassifier(**model_params))
+        ('classifier', XGBClassifier(**model_params))
     ])
     logger.info("Pipeline built: ColumnTransformer → XGBClassifier")
     return pipeline
