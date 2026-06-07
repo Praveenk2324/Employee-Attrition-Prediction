@@ -1,0 +1,26 @@
+schema: '2.0'
+stages:
+  ingest:
+    cmd: python src/ingest.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 1d70a99da9ff8bf1784c863bf1286759
+      size: 1473
+    - path: data/raw/HR-Employee-Attrition.csv
+      hash: md5
+      md5: ad8207459e5732574372cf8ff619883f
+      size: 227977
+    - path: src/ingest.py
+      hash: md5
+      md5: b918d5991b4efef00c75193531c66f38
+      size: 1646
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: ec519a3e37b0e2ddf0204c88857a39ed
+      size: 42261
+    - path: data/processed/train.csv
+      hash: md5
+      md5: c8fa31e4600df0c78f2833e00188b03b
+      size: 167579

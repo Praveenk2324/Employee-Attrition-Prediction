@@ -1,0 +1,11 @@
+stages:
+  ingest:
+    cmd: python src/ingest.py
+    deps:
+      - data/raw/HR-Employee-Attrition.csv
+      - src/ingest.py
+      - config/config.yaml
+
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv

@@ -4,7 +4,7 @@ import yaml
 import logging
 from pathlib import Path
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [(%levelname)s] %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -31,3 +31,15 @@ def ingest(config: dict) -> tuple[pd.DataFrame, pd.DataFrame]:
     logger.info(f"Class distribution :\n{df[target_col].value_counts()}")
 
     train_df, test_df = train_test_split(df, test_size=config['data']['test_size'], random_state=config['data']['random_state'], stratify=df[target_col])
+
+    Path(train_out).parent.mkdir(parents=True, exist_ok=True)
+    train_df.to_csv(train_out, index=False)
+    test_df.to_csv(test_out, index=False)
+    logger.info(f"Train: {train_df.shape} → {train_out}")
+    logger.info(f"Test:  {test_df.shape}  → {test_out}")
+
+    return train_df, test_df
+
+if __name__ == "__main__":
+    cfg = load_config()
+    ingest(cfg)
